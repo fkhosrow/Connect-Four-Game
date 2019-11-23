@@ -1,0 +1,11 @@
+table {
+    border-collapse: separate !important;
+}
+
+td {
+    border-radius: 50%;
+    border: 2px solid black;    
+    width: 100px;
+    height: 100px;
+    background-color: rgb(128, 128, 128);
+}
