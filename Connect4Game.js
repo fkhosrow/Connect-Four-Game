@@ -80,6 +80,24 @@ function isFourConnectedVertical() {
 }
 
 function isFourConnectedDiagonal() {
+    // Check negative slope
+    for (var row = 0; row < rowCount; row++) {
+        for (var col = 0; col < colCount-3; col++) {
+            if (is4Connected(getCellColor(row, col), getCellColor(row+1, col+1), getCellColor(row+2, col+2), getCellColor(row+3, col+3))) {
+                return true;
+            }
+        }
+    }
+
+    // Check positive slope
+    for (var row = rowCount-1; row >= 0; row--) {
+        for (var col = 0; col < colCount-3; col++) {
+            if (is4Connected(getCellColor(row, col), getCellColor(row-1, col+1), getCellColor(row-2, col+2), getCellColor(row-3, col+3))) {
+                return true;
+            }
+        }
+    }
+
     return false;
 }
 
