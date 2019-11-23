@@ -9,3 +9,7 @@ td {
     height: 100px;
     background-color: rgb(128, 128, 128);
 }
+
+#winBanner {
+    visibility: hidden;
+}

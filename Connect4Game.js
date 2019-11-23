@@ -4,6 +4,8 @@ var colCount = 7;
 var player1Name = "";
 var player2Name = "";
 
+var nClicks = 0;
+
 $(document).ready(function () {
     // Empty on OK or Cancel
     while (player1Name === "" || player1Name == null) {
@@ -48,11 +50,10 @@ function is4Connected(color1, color2, color3, color4) {
         );
 }
 
-function reportWinner(playerName) {
-    $("h1").text(playerName + ": You have won!");
-    $("h2").fadeOut("slow");
-    $("h3").fadeOut("slow");
-    $("table").fadeOut("slow");
+function reportWinner() {
+    $("#board").fadeOut("slow");
+    $("#winBanner").css('visibility', 'visible'); // jQuery.show() does not work since this element has a css property for visibility
+    $("#winBannerText").text(currentPlayerName + ": You have won!");
 }
 
 function isFourConnectedHorizontal() {
@@ -102,13 +103,16 @@ function isFourConnectedDiagonal() {
 }
 
 $('td').on('click', function () {
+    nClicks += 1;
+    $("span").text(nClicks);
+
     if (currentPlayer === 1) {
         var col = $(this).closest("td").index();
         var row = getNextCell(col);
         changeCellColor(row, col, currentColor);
         
         if (isFourConnectedHorizontal() || isFourConnectedVertical() || isFourConnectedDiagonal()) {
-            reportWinner(currentPlayerName);
+            reportWinner();
             return;
         }
 
@@ -124,7 +128,7 @@ $('td').on('click', function () {
         changeCellColor(row, col, currentColor);
         
         if (isFourConnectedHorizontal() || isFourConnectedVertical() || isFourConnectedDiagonal()) {
-            reportWinner(currentPlayerName);
+            reportWinner();
             return; 
         }
 
